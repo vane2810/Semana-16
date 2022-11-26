@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Semana_16.Models.Movie>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Movies";
 }
 
 <h1>Index</h1>
@@ -24,7 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id"><img src="~/img/edit.png" width="18" /></a> |
+                <a asp-action="Details" asp-route-id="@item.Id"><img src="~/img/details.png" width="18" /></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"><img src="~/img/delete.png" width="18" /></a>
             </td>
         </tr>
 }
