@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Semana_16.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,9 @@ namespace Semana_16
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<Semana_16Context>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("Semana_16Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
