@@ -10,27 +10,22 @@ using Semana_16.Models;
 
 namespace Semana_16.Controllers
 {
-    public class MoviesController : Controller
+    public class TeathersController : Controller
     {
         private readonly Semana_16Context _context;
 
-        public MoviesController(Semana_16Context context)
+        public TeathersController(Semana_16Context context)
         {
             _context = context;
         }
 
-        // GET: Movies
-        public async Task<IActionResult> Index(string search)
+        // GET: Teathers
+        public async Task<IActionResult> Index()
         {
-            var movies = from m in _context.Movie select m;
-            if(string.IsNullOrEmpty(search))
-            {
-                movies = movies.Where(s => s.Title.Contains(search));
-            }
-            return View(await _context.Movie.ToListAsync());
+            return View(await _context.Teather.ToListAsync());
         }
 
-        // GET: Movies/Details/5
+        // GET: Teathers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,39 +33,39 @@ namespace Semana_16.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
+            var teather = await _context.Teather
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            if (teather == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(teather);
         }
 
-        // GET: Movies/Create
+        // GET: Teathers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: Teathers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Name,Location,Cinemas,Price")] Teather teather)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movie);
+                _context.Add(teather);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(movie);
+            return View(teather);
         }
 
-        // GET: Movies/Edit/5
+        // GET: Teathers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,22 +73,22 @@ namespace Semana_16.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie.FindAsync(id);
-            if (movie == null)
+            var teather = await _context.Teather.FindAsync(id);
+            if (teather == null)
             {
                 return NotFound();
             }
-            return View(movie);
+            return View(teather);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Teathers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Location,Cinemas,Price")] Teather teather)
         {
-            if (id != movie.Id)
+            if (id != teather.Id)
             {
                 return NotFound();
             }
@@ -102,12 +97,12 @@ namespace Semana_16.Controllers
             {
                 try
                 {
-                    _context.Update(movie);
+                    _context.Update(teather);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieExists(movie.Id))
+                    if (!TeatherExists(teather.Id))
                     {
                         return NotFound();
                     }
@@ -118,10 +113,10 @@ namespace Semana_16.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(movie);
+            return View(teather);
         }
 
-        // GET: Movies/Delete/5
+        // GET: Teathers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,30 +124,30 @@ namespace Semana_16.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
+            var teather = await _context.Teather
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            if (teather == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(teather);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Teathers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var movie = await _context.Movie.FindAsync(id);
-            _context.Movie.Remove(movie);
+            var teather = await _context.Teather.FindAsync(id);
+            _context.Teather.Remove(teather);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MovieExists(int id)
+        private bool TeatherExists(int id)
         {
-            return _context.Movie.Any(e => e.Id == id);
+            return _context.Teather.Any(e => e.Id == id);
         }
     }
 }

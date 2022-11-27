@@ -1,53 +1,59 @@
 ﻿@model IEnumerable<Semana_16.Models.Movie>
 
-@{
-    ViewData["Title"] = "Movies";
-}
+    @{
+        ViewData["Title"] = "Movies";
+    }
 
-<h1>Index</h1>
+    <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReleaseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id"><img src="~/img/edit.png" width="18" /></a> |
-                <a asp-action="Details" asp-route-id="@item.Id"><img src="~/img/details.png" width="18" /></a> |
-                <a asp-action="Delete" asp-route-id="@item.Id"><img src="~/img/delete.png" width="18" /></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+    <form asp-controller="Movies" asp-action="Index">
+        <input type="text" name="search" />
+        <input type="submit" value="Buscar" />
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReleaseDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id"><img src="~/img/edit.png" width="18" /></a> |
+                        <a asp-action="Details" asp-route-id="@item.Id"><img src="~/img/details.png" width="18" /></a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id"><img src="~/img/delete.png" width="18" /></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
